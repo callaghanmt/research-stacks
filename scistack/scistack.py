@@ -11,9 +11,14 @@ import inspect
 
 app = flask.Flask(__name__, static_url_path='')
 
+
+_PATH_HERE = os.path.dirname(
+    os.path.abspath(
+        inspect.getfile(inspect.currentframe()))
+)
+ROOT_DIR = os.path.join(_PATH_HERE, "..")
 # Home of any pre-build docker files
-docker_file_path = os.path.join(os.path.dirname(os.path.abspath(
-    inspect.getfile(inspect.currentframe()))), "..", "dockerfiles")
+docker_file_path = os.path.join(ROOT_DIR, "dockerfiles")
 
 @app.route("/")
 def index():
