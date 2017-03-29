@@ -16,8 +16,8 @@ docker_file_path = os.path.join(os.path.dirname(os.path.abspath(
     inspect.getfile(inspect.currentframe()))), "..", "dockerfiles")
 
 @app.route("/")
-def hello():
-    return "Choose a domain!"
+def index():
+    return flask.render_template("main.html")
 
 @app.route("/dfview/<path:fname>")
 def send_dockerfile(fname):
