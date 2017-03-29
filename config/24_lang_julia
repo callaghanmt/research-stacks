@@ -1,0 +1,8 @@
+RUN wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz && tar -zxvf julia-0.5.1-linux-x86_64.tar.gz
+
+RUN mv julia-6445c82d00 julia && rm julia-0.5.1-linux-x86_64.tar.gz
+
+
+
+
+
