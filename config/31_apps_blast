@@ -1,5 +1,5 @@
 RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.6.0+-src.tar.gz
 
 RUN tar -zxvf ncbi-blast-2.6.0+-src.tar.gz && mv ncbi-blast-2.6.0+-src blast && rm ncbi-blast-2.6.0+-src.tar.gz
-
-RUN cd blast/c++ && ./configure && make && make install
+RUN apt-get install -y cpio
+RUN cd blast/c++ && ./configure && make -j4 && make install
