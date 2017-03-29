@@ -31,6 +31,14 @@ def send_dockerfile(fname):
     dockerfile = get_dockerfile_lines(os.path.join(docker_file_path, fname))
     return flask.render_template('dockerview.html', lines=dockerfile)
 
+@app.route("/about.html")
+def about():
+    return flask.render_template('about.html')
+
+@app.route("/contact.html")
+def contact():
+    return flask.render_template('contact.html')
+
 def openfile(read_function):
     """Decorator to read data from files or file like instances.
        Adding the @openfile decorator to a function designed to read from a
@@ -62,7 +70,7 @@ def get_dockerfile_lines(fh):
     """
     dockerfile = []
     for line in fh:
-        dockerfile.append(line)
+        dockerfile.append(line.strip())
     return dockerfile
     
 
