@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-  <p>Docker file text:</p>
-  <code>
+  <h1>Docker file view</h1>
+  <p>Text of the docker file you have built is:</p>
+  <pre><code>
   {% for line in lines %}
-  {{ line|safe }}</br>
+  {{ line|safe }}
   {% endfor %}
-  </code>
-  <p>We need to say what to do with it</p>
+  </code></pre>
+  <p>This can be used to build a container on DockerHub</p>
 {% endblock %}
