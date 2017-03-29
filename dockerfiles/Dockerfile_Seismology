@@ -15,4 +15,6 @@ RUN apt-get install -y wget
 # Generic mapping tools
 RUN apt-get install -y gmt gmt-dcw
 
+# ObsPy
+RUN echo "deb http://deb.obspy.org xenial main" >> /etc/apt/sources.list && wget --quiet -O - https://raw.github.com/obspy/obspy/master/misc/debian/public.key | apt-key add - && apt-get update && apt-get install -y python-obspy python3-obspy
  
