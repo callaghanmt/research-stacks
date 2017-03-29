@@ -4,7 +4,7 @@ Reproducible software stacks for research
 ## Overview
 * New PhD students and post-docs often join a group and need to get up and running with a core set of libraries, languages and applications
 * More experienced researchers need to be able to select a set of libraries and applications and not have to be concerned about dependencies or versions.
-*We want our research stacks to facilitate reproducible research to build once and deploy anywhere.
+* We want our research stacks to facilitate reproducible research to build once and deploy anywhere.
   
 ## Installation
 
