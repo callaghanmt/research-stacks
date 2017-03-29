@@ -1,33 +1,36 @@
-<html>
-<body>
+{% extends "layout.html" %}
+{% block body %}
 
-<p>The image is a link. You can click on it.</p>
+<h1>Choose a docker envrionment</h1>
+<p>We have pre-built some docker envronemnts, choose one to build a container</p>
 <table style="width:100%">
   <tr>
   <td>
   <a href="dfview/Dockerfile_Seismology">
-    <img src="seismo.jpg" alt="seismology docker file"     style="width:50px;height:50px;border:0;">
+    <img src="seismo.jpg" alt="seismology docker file"
+     style="width:150px;height:150px;border:0;">
   </a>
   </td>
     <td>
   <a href="dfview/Dockerfile_DataScience">
-    <img src="data.png" alt="data science docker file"     style="width:50px;height:50px;border:0;">
+    <img src="data.png" alt="data science docker file"
+     style="width:150px;height:150px;border:0;">
   </a>
   </td>
   </tr>
   <tr>
   <td>
-  Seismology
+  <a href='dfview/Dockerfile_DataScience'>Seismology envronment</a>
   </td>
   <td>
-  Data science
+  <a href='dfview/Dockerfile_DataScience'>Data science environment</a>
   </td>
   </tr>
 </table>
-<p>Some text here</p>
 
 {% block content %}
-<table><form method="POST"  action="/builddockerfile">
+<h1>Build a docker envrionment</h1>
+<table class="table"><form method="POST"  action="/builddockerfile">
 <tr>
 <th> OS </th>
 <th> Language(s) </th>
@@ -51,10 +54,10 @@
 </td>
 </tr>
 <td>
-    <input class="button1" type="submit" value="Build">
+    <input class="button1" type="submit" value="Build docker configuration">
 </td>
 
 </form></table>
 {% endblock content %}
-</body>
-</html>
+
+{% endblock %}
