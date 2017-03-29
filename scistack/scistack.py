@@ -26,9 +26,11 @@ def index():
 
 @app.route("/dfview/<path:fname>")
 def send_dockerfile(fname):
+    dockerfile = []
     with open(os.path.join(docker_file_path, fname)) as dfile:
-        return_value = dfile.read()
-    return return_value
+        for line in dfile:
+            dockerfile.append(line)
+    return flask.render_template('dockerview.html', lines=dockerfile)
 
 if __name__ == "__main__":
     app.run()
