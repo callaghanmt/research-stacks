@@ -9,3 +9,5 @@ and
 http://flask.pocoo.org/
 
 Do a 'conda install flask' and all is good. 
+
+Don't choose BLAST- it takes ages to install

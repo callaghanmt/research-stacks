@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+  <p>Docker file text:</p>
+  <code>
+  {% for line in lines %}
+  {{ line|safe }}</br>
+  {% endfor %}
+  </code>
+  <p>We need to say what to do with it</p>
+{% endblock %}
