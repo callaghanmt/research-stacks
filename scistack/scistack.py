@@ -24,14 +24,19 @@ docker_file_path = os.path.join(ROOT_DIR, "dockerfiles")
 
 @app.route("/")
 def index():
-    fragments = {"os": ["foo", "bar"], "libs": ["spam", "ham"], "apps": ["fred", "joe"], "langs": ["python"]}
-    return flask.render_template("main.html", os=fragments["os"], libs=fragments["libs"], apps=fragments["apps"], langs=fragments["langs"])
+    from parse_config import options_dict
+    fragments = options_dict()
+    return flask.render_template("main.html", os=fragments.get("os"), libs=fragments.get("lib"), apps=fragments.get("apps"), langs=fragments.get("lang"))
 
 @app.route("/builddockerfile", methods=["POST"])
 def dockerbuilder():
+   from parse_config import required_files
    options = flask.request.form.to_dict()
-   print("#########################")
+   files = required_files(options)
+   print("*************************")
    print(options)
+   print("#########################")
+   print(files)
    return "ok"
 
 @app.route("/dfview/<path:fname>")
