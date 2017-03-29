@@ -8,6 +8,8 @@ SciStack: the web app to build docker containers for reproducable science
 import os
 import flask
 import inspect
+import gzip
+from functools import wraps
 
 app = flask.Flask(__name__, static_url_path='')
 
@@ -26,9 +28,43 @@ def index():
 
 @app.route("/dfview/<path:fname>")
 def send_dockerfile(fname):
-    with open(os.path.join(docker_file_path, fname)) as dfile:
-        return_value = dfile.read()
-    return return_value
+    dockerfile = get_dockerfile_lines(os.path.join(docker_file_path, fname))
+    return flask.render_template('dockerview.html', lines=dockerfile)
+
+def openfile(read_function):
+    """Decorator to read data from files or file like instances.
+       Adding the @openfile decorator to a function designed to read from a
+       open file handle permits filenames to be given as arguments. If a string
+       argument is given it is treated as a file name and opened prior to the 
+       main read function being called. If the file name ends in .gz, the file
+       is also uncompressed on the fly.
+    """
+    @wraps(read_function)
+    def wrapped_function(f, **kwargs):
+        if isinstance(f, str):
+            if os.path.splitext(f)[1] == '.gz':
+                with gzip.open(f, 'rt') as f:
+                    return read_function(f, **kwargs)
+            else:
+                with open(f, 'r') as f:
+                    return read_function(f, **kwargs)
+        else:
+            return read_function(f)
+
+    return wrapped_function
+
+@openfile
+def get_dockerfile_lines(fh):
+    """Read a dockerfile into a list of lines for rendering
+    
+    most of the guts of this is in openfile, which handles compressed files
+    and URLs
+    """
+    dockerfile = []
+    for line in fh:
+        dockerfile.append(line)
+    return dockerfile
+    
 
 if __name__ == "__main__":
     app.run()
