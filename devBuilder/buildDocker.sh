@@ -4,6 +4,6 @@
 mkdir dockertest
 cp $1 dockertest/Dockerfile
 
-docker build dockertest -t research-stacks:dockertest
+docker build dockertest -t research-stacks/dockertest
 
 
