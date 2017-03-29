@@ -1,0 +1,20 @@
+FROM ubuntu:latest
+
+MAINTAINER Martin Callaghan <m.callaghan@leeds.ac.uk> 
+
+RUN apt-get -y update && apt-get install -y build-essential
+
+RUN apt-get install -y apt-utils
+
+RUN apt-get install -y gfortran
+
+RUN apt-get install -y libopenblas-base
+
+RUN apt-get install -y wget
+
+# Generic mapping tools
+RUN apt-get install -y gmt gmt-dcw
+
+# ObsPy
+RUN echo "deb http://deb.obspy.org xenial main" >> /etc/apt/sources.list && wget --quiet -O - https://raw.github.com/obspy/obspy/master/misc/debian/public.key | apt-key add - && apt-get update && apt-get install -y python-obspy python3-obspy
+ 
