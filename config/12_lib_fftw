@@ -1,0 +1,1 @@
+RUN apt-get install -y libfftw3-dev libfftw3-doc
