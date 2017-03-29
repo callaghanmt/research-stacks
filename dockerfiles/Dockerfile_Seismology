@@ -1,0 +1,18 @@
+FROM ubuntu:latest
+
+MAINTAINER Martin Callaghan <m.callaghan@leeds.ac.uk> 
+
+RUN apt-get -y update && apt-get install -y build-essential
+
+RUN apt-get install -y apt-utils
+
+RUN apt-get install -y gfortran
+
+RUN apt-get install -y libopenblas-base
+
+RUN apt-get install -y wget
+
+# Generic mapping tools
+RUN apt-get install -y gmt gmt-dcw
+
+ 
