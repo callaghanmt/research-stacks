@@ -1,13 +1,16 @@
-# research-stacks
+# SciStacks
 Reproducible software stacks for research
 
-1. Flask:
-https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+## Overview
+* New PhD students and post-docs often join a group and need to get up and running with a core set of libraries, languages and applications
+* More experienced researchers need to be able to select a set of libraries and applications and not have to be concerned about dependencies or versions.
+*We want our research stacks to facilitate reproducible research to build once and deploy anywhere.
+  
+## Installation
 
-and
+A working Python 3 install with [Flask](http://flask.pocoo.org/) installed is required.  The easiest way to achieve this is to install [Anaconda Python](https://www.continuum.io/downloads) and then:
 
-http://flask.pocoo.org/
 
-Do a 'conda install flask' and all is good. 
-
-Don't choose BLAST- it takes ages to install
+```
+conda install flask
+```
