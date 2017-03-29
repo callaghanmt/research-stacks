@@ -4,4 +4,5 @@ MAINTAINER tbc <tbc@tbc.com>
 
 RUN apt-get -y update && apt-get install -y build-essential
 
-RUN apt-get install -y apt-utils gfortran libopenblas-base wget
+RUN apt-get install -y apt-utils gfortran libopenblas-base wget software-properties-common
+
