@@ -17,10 +17,6 @@ def config_files():
     cfg_start = '[0-9]*'
     poss_cfgs = os.path.join(CONFIG_DIR, cfg_start)
     paths = glob.glob(poss_cfgs)
-    # print('>>>>>>>>>>>>>>>>>>>>')
-    # print(os.listdir(CONFIG_DIR))
-    # print('>>>>>>>>>>>>>>>>>>>>')
-    # print(poss_cfgs)
     files = [os.path.basename(p) for p in paths]
     return files
 
@@ -38,5 +34,33 @@ def options_dict():
         options[head_opt].append(val)
     return options
 
+
+def required_files(opts_dict):
+    """
+    build list of Dockerfile-fragments
+    based on options dictionary of lists
+    """
+    matcher = '[0-9]*_{0}_{1}*'
+    file_list = []
+    for key, values in opts_dict.items():
+        for value in values:
+            poss_file = matcher.format(key, value)
+            poss_path = os.path.join(CONFIG_DIR, poss_file)
+            matches = glob.glob(poss_path)
+            if matches:
+                file_list.append(matches[0])
+    return file_list
+
+
 if __name__ == '__main__':
+    OPTS = {'os': ['ubuntu'], 'lang': ['R', 'python2', 'haskel']}
+    print()
+    print('######## search for files matching dict of lists ####')
+    print(required_files(OPTS))
+    print()
+    print()
+    print('######## populate dict of poss lists from files found ####')
     print(options_dict())
+
+
+
