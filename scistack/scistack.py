@@ -22,6 +22,20 @@ ROOT_DIR = os.path.join(_PATH_HERE, "..")
 # Home of any pre-build docker files
 docker_file_path = os.path.join(ROOT_DIR, "dockerfiles")
 
+mylist = ["00_os_ubuntu_latest", "34_app_emacs", "18_lib_vtk"]
+
+def create_Dockerfile(fragmentList):
+    fragmentList.sort()
+
+    Dockerfile = ""
+    for fragment in fragmentList:
+        fragmentfile = open(fragment, "r")
+        Dockerfile = Dockerfile + fragmentfile.read()
+        fragmentfile.close()
+
+    return Dockerfile
+
+
 @app.route("/")
 def index():
     from parse_config import options_dict
@@ -33,11 +47,8 @@ def dockerbuilder():
    from parse_config import required_files
    options = flask.request.form.to_dict()
    files = required_files(options)
-   print("*************************")
-   print(options)
-   print("#########################")
-   print(files)
-   return "ok"
+   output = create_Dockerfile(files)
+   return output
 
 @app.route("/dfview/<path:fname>")
 def send_dockerfile(fname):
