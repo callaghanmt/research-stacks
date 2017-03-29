@@ -26,6 +26,35 @@
 </table>
 <p>Some text here</p>
 
+{% block content %}
+<table><form method="POST"  action="/builddockerfile">
+<tr>
+<th> OS </th>
+<th> Language(s) </th>
+<th> Applications </th>
+</tr>
+<tr>
+<td>
+{% for system in os %}
+    <input type="checkbox" name="os" value="{{ system }}">{{ system }}<br>
+{% endfor %}
+</td>
+<td>
+{% for lang in langs %}
+    <input type="checkbox" name="language" value="{{ lang }}">{{ lang }}<br>
+{% endfor %}
+</td>
+<td>
+{% for app in apps %}
+    <input type="checkbox" name="application" value="{{ app }}">{{ app }}<br>
+{% endfor %}
+</td>
+</tr>
+<td>
+    <input class="button1" type="submit" value="Build">
+</td>
 
+</form></table>
+{% endblock content %}
 </body>
 </html>
