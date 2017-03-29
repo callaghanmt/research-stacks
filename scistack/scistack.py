@@ -24,12 +24,28 @@ docker_file_path = os.path.join(ROOT_DIR, "dockerfiles")
 
 @app.route("/")
 def index():
-    return flask.render_template("main.html")
+    fragments = {"os": ["foo", "bar"], "libs": ["spam", "ham"], "apps": ["fred", "joe"], "langs": ["python"]}
+    return flask.render_template("main.html", os=fragments["os"], libs=fragments["libs"], apps=fragments["apps"], langs=fragments["langs"])
+
+@app.route("/builddockerfile", methods=["POST"])
+def dockerbuilder():
+   options = flask.request.form.to_dict()
+   print("#########################")
+   print(options)
+   return "ok"
 
 @app.route("/dfview/<path:fname>")
 def send_dockerfile(fname):
     dockerfile = get_dockerfile_lines(os.path.join(docker_file_path, fname))
     return flask.render_template('dockerview.html', lines=dockerfile)
+
+@app.route("/about.html")
+def about():
+    return flask.render_template('about.html')
+
+@app.route("/contact.html")
+def contact():
+    return flask.render_template('contact.html')
 
 def openfile(read_function):
     """Decorator to read data from files or file like instances.
@@ -62,7 +78,7 @@ def get_dockerfile_lines(fh):
     """
     dockerfile = []
     for line in fh:
-        dockerfile.append(line)
+        dockerfile.append(line.strip())
     return dockerfile
     
 
