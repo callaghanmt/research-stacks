@@ -1,0 +1,3 @@
+RUN add-apt-repository -y ppa:jonathonf/ffmpeg-3
+
+RUN sudo apt update && sudo apt install ffmpeg libav-tools x264 x265
