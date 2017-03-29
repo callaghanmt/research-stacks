@@ -14,3 +14,10 @@ A working Python 3 install with [Flask](http://flask.pocoo.org/) installed is re
 ```
 conda install flask
 ```
+
+Start the service by running
+```
+python scistack/scistack.py
+```
+and go to http://127.0.0.0.1:5000
+
