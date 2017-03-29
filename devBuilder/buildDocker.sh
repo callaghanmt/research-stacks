@@ -1,16 +1,19 @@
 #!/bin/bash
 # Build a docker image from a file or several fragments
-
-mkdir -p dockertest
+# Pass docker image name followed by Dockerfile or ordered fragments
+mkdir -p $1
 # Make an empty file
-echo "" > dockertest/Dockerfile
+echo "" > $1/Dockerfile
 
 for var in "$@"
 do
-	echo "Adding $var to recipe"
-	cat "$var" >> dockertest/Dockerfile
+	if [ "$1" != "$var" ]
+	then
+		echo "Adding $var to recipe"
+		cat "$var" >> ${1}/Dockerfile
+	fi
 done
 
-docker build dockertest -t research-stacks/dockertest
+docker build $1 -t research-stacks/$1
 
 
