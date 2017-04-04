@@ -45,8 +45,7 @@ def index():
 @app.route("/builddockerfile", methods=["POST"])
 def dockerbuilder():
    from parse_config import required_files
-   options = flask.request.form.to_dict()
-   files = required_files(options)
+   files = required_files(flask.request.form)
    output = create_Dockerfile(files)
    return output
 
