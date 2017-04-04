@@ -38,12 +38,17 @@ def options_dict():
 def required_files(opts_dict):
     """
     build list of Dockerfile-fragments
-    based on options dictionary of lists
+    based on a flask.request.form. This is a
+    ImmutableMultiDict (see 
+    http://werkzeug.pocoo.org/docs/0.11/datastructures/)
+    which is like a dict, but can have multiple keys with
+    the same value and has a getlist method to group values
+    of such keys.
     """
     matcher = '[0-9]*_{0}_{1}*'
     file_list = []
-    for key, values in opts_dict.items():
-        for value in values:
+    for key in opts_dict.keys():
+        for value in opts_dict.getlist(key):
             poss_file = matcher.format(key, value)
             poss_path = os.path.join(CONFIG_DIR, poss_file)
             matches = glob.glob(poss_path)
